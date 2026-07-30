@@ -1,7 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 
-import foodImg from "../assets/food-spread.jpg";
+import menuImg from "../assets/coffee.png";
+import { useScrollReveal } from "../hooks/use-scroll-reveal";
 import { MENU, RESTAURANT } from "../data/restaurant";
+
+function MenuSection({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`${className} transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 const title = "Menu & Prices — Kivu Coffee Cup, Karongi";
 const description =
@@ -31,7 +45,11 @@ export const Route = createFileRoute("/menu")({
               "@type": "MenuItem",
               name: i.name,
               description: i.desc,
-              offers: { "@type": "Offer", price: i.price.replace(/[^0-9]/g, ""), priceCurrency: "RWF" },
+              offers: {
+                "@type": "Offer",
+                price: i.price.replace(/[^0-9]/g, ""),
+                priceCurrency: "RWF",
+              },
             })),
           })),
         }),
@@ -46,7 +64,7 @@ function MenuPage() {
     <>
       <section className="relative isolate overflow-hidden">
         <img
-          src={foodImg}
+          src={menuImg}
           alt="Assorted dishes from the Kivu Coffee Cup kitchen"
           width={1408}
           height={1008}
@@ -64,7 +82,7 @@ function MenuPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-4xl px-5 py-16 sm:py-24">
+      <MenuSection className="mx-auto max-w-4xl px-5 py-16 sm:py-24">
         <div className="space-y-14">
           {MENU.map((section) => (
             <div key={section.section}>
@@ -93,7 +111,7 @@ function MenuPage() {
           </a>{" "}
           to pre-order, reserve a table or arrange delivery.
         </p>
-      </section>
+      </MenuSection>
     </>
   );
 }

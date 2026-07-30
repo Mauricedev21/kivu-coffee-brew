@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 
-import heroImg from "../assets/hero-coffee.jpg";
-import foodImg from "../assets/food-spread.jpg";
-import interiorImg from "../assets/interior.jpg";
+import heroImg from "../assets/home.jpg";
+import foodImg from "../assets/menu.png";
+import interiorImg from "../assets/interior.png";
 import { Stars } from "../components/stars";
+import { useScrollReveal } from "../hooks/use-scroll-reveal";
 import { HIGHLIGHTS, MENU, RESTAURANT, REVIEWS } from "../data/restaurant";
 
 const title = "Kivu Coffee Cup — Coffee, Pizza & Grills in Karongi, Rwanda";
@@ -23,6 +25,18 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+function Section({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <section
+      ref={ref}
+      className={`${className} transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+    >
+      {children}
+    </section>
+  );
+}
 
 function Index() {
   return (
@@ -71,7 +85,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
+      <Section className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {HIGHLIGHTS.map((h) => (
             <article key={h.title} className="surface-card p-6">
@@ -80,9 +94,9 @@ function Index() {
             </article>
           ))}
         </div>
-      </section>
+      </Section>
 
-      <section className="bg-secondary/60 py-16 sm:py-24">
+      <Section className="bg-secondary/60 py-16 sm:py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-2">
           <img
             src={foodImg}
@@ -125,9 +139,9 @@ function Index() {
             </Link>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:py-24">
+      <Section className="mx-auto max-w-6xl px-5 py-16 sm:py-24">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="eyebrow">Reviews</p>
@@ -153,9 +167,9 @@ function Index() {
             </article>
           ))}
         </div>
-      </section>
+      </Section>
 
-      <section className="bg-espresso text-cream">
+      <Section className="bg-espresso text-cream">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:py-24 lg:grid-cols-2">
           <div>
             <p className="eyebrow text-gold">Find us</p>
@@ -194,7 +208,7 @@ function Index() {
             className="rounded-3xl"
           />
         </div>
-      </section>
+      </Section>
     </>
   );
 }

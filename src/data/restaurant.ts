@@ -13,8 +13,16 @@ export const MENU = [
   {
     section: "Coffee & Drinks",
     items: [
-      { name: "African Coffee", desc: "Single-origin Lake Kivu beans, roasted in house.", price: "RF 2,000" },
-      { name: "Cappuccino", desc: "Double shot, silky steamed milk, cocoa dust.", price: "RF 2,500" },
+      {
+        name: "African Coffee",
+        desc: "Single-origin Lake Kivu beans, roasted in house.",
+        price: "RF 2,000",
+      },
+      {
+        name: "Cappuccino",
+        desc: "Double shot, silky steamed milk, cocoa dust.",
+        price: "RF 2,500",
+      },
       { name: "Latte", desc: "Smooth espresso with velvet microfoam art.", price: "RF 2,500" },
       { name: "Fresh Juice", desc: "Passion fruit, tree tomato or pineapple.", price: "RF 2,000" },
     ],
@@ -22,25 +30,53 @@ export const MENU = [
   {
     section: "Burgers & Grills",
     items: [
-      { name: "Beef Burger", desc: "Char-grilled patty, cheddar, tomato, house sauce, fries.", price: "RF 7,000" },
-      { name: "Chicken Burger", desc: "Marinated grilled chicken breast, slaw, fries.", price: "RF 6,500" },
-      { name: "Sizzling Steak", desc: "Guest favourite — served still sizzling with pepper sauce.", price: "RF 10,000" },
+      {
+        name: "Beef Burger",
+        desc: "Char-grilled patty, cheddar, tomato, house sauce, fries.",
+        price: "RF 7,000",
+      },
+      {
+        name: "Chicken Burger",
+        desc: "Marinated grilled chicken breast, slaw, fries.",
+        price: "RF 6,500",
+      },
+      {
+        name: "Sizzling Steak",
+        desc: "Guest favourite — served still sizzling with pepper sauce.",
+        price: "RF 10,000",
+      },
     ],
   },
   {
     section: "Pizza & Plates",
     items: [
-      { name: "Chicken Pizza", desc: "Wood-fired base, mozzarella, peppers, grilled chicken.", price: "RF 10,000" },
-      { name: "Fish and Chips", desc: "Lake Kivu tilapia, golden fries, tartare.", price: "RF 8,000" },
+      {
+        name: "Chicken Pizza",
+        desc: "Wood-fired base, mozzarella, peppers, grilled chicken.",
+        price: "RF 10,000",
+      },
+      {
+        name: "Fish and Chips",
+        desc: "Lake Kivu tilapia, golden fries, tartare.",
+        price: "RF 8,000",
+      },
       { name: "Chicken Curry", desc: "Slow-simmered coconut curry with rice.", price: "RF 7,500" },
     ],
   },
   {
     section: "Snacks & Bakery",
     items: [
-      { name: "Sambusa Meatball", desc: "Crisp pastry parcels with spiced beef.", price: "RF 3,000" },
+      {
+        name: "Sambusa Meatball",
+        desc: "Crisp pastry parcels with spiced beef.",
+        price: "RF 3,000",
+      },
       { name: "French Fries", desc: "Hand-cut, double fried, chilli salt.", price: "RF 3,000" },
-      { name: "Birthday Cake Slice", desc: "From our bakery next door — baked fresh daily.", price: "RF 3,500" },
+      {
+        name: "Birthday Cake Slice",
+        desc: "From our bakery next door — baked fresh daily.",
+        price: "RF 3,500",
+      },
     ],
   },
 ];

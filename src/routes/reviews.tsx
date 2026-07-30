@@ -1,7 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 
 import { Stars } from "../components/stars";
+import { useScrollReveal } from "../hooks/use-scroll-reveal";
 import { RESTAURANT, REVIEWS } from "../data/restaurant";
+
+function ReviewSection({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`${className} transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 const title = "Guest Reviews — Kivu Coffee Cup, Karongi";
 const description =
@@ -35,17 +49,13 @@ function ReviewsPage() {
   return (
     <div className="mx-auto max-w-5xl px-5 py-16 sm:py-24">
       <p className="eyebrow">Reviews</p>
-      <h1 className="mt-3 font-display text-4xl font-semibold sm:text-5xl">
-        What our guests say
-      </h1>
+      <h1 className="mt-3 font-display text-4xl font-semibold sm:text-5xl">What our guests say</h1>
 
-      <div className="surface-card mt-10 grid gap-8 p-8 sm:grid-cols-[auto_1fr] sm:items-center">
+      <ReviewSection className="surface-card mt-10 grid gap-8 p-8 sm:grid-cols-[auto_1fr] sm:items-center">
         <div className="text-center sm:text-left">
           <div className="font-display text-6xl font-semibold">{RESTAURANT.rating}</div>
           <Stars rating={RESTAURANT.rating} className="mt-2" />
-          <p className="mt-1 text-sm text-muted-foreground">
-            {RESTAURANT.reviewCount} reviews
-          </p>
+          <p className="mt-1 text-sm text-muted-foreground">{RESTAURANT.reviewCount} reviews</p>
         </div>
         <div className="space-y-2">
           {breakdown.map((b) => (
@@ -61,20 +71,22 @@ function ReviewsPage() {
             </div>
           ))}
         </div>
-      </div>
+      </ReviewSection>
 
-      <ul className="mt-8 flex flex-wrap gap-2">
-        {tags.map((t) => (
-          <li
-            key={t}
-            className="rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground"
-          >
-            {t}
-          </li>
-        ))}
-      </ul>
+      <ReviewSection className="mt-8">
+        <ul className="flex flex-wrap gap-2">
+          {tags.map((t) => (
+            <li
+              key={t}
+              className="rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground"
+            >
+              {t}
+            </li>
+          ))}
+        </ul>
+      </ReviewSection>
 
-      <div className="mt-12 space-y-6">
+      <ReviewSection className="mt-12 space-y-6">
         {REVIEWS.map((r) => (
           <article key={r.author} className="surface-card p-7">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -90,9 +102,9 @@ function ReviewsPage() {
             <p className="mt-4 leading-relaxed text-muted-foreground">{r.text}</p>
           </article>
         ))}
-      </div>
+      </ReviewSection>
 
-      <div className="mt-12 rounded-3xl bg-espresso p-8 text-cream">
+      <ReviewSection className="mt-12 rounded-3xl bg-espresso p-8 text-cream">
         <h2 className="font-display text-2xl font-semibold">Visited us recently?</h2>
         <p className="mt-2 text-sm text-cream/75">
           Tell us how we did — feedback goes straight to the kitchen and the bar.
@@ -103,7 +115,7 @@ function ReviewsPage() {
         >
           Call {RESTAURANT.phone}
         </a>
-      </div>
+      </ReviewSection>
     </div>
   );
 }

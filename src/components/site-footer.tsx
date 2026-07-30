@@ -55,6 +55,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-cream/15 px-5 py-6 text-center text-xs text-cream/50">
         © {new Date().getFullYear()} Kivu Coffee Cup · RF 5,000–10,000 per person
+        <span className="block mt-1 text-[10px] text-cream/40">Powered by Maurice</span>
       </div>
     </footer>
   );

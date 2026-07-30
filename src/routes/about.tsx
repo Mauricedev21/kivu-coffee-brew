@@ -1,7 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 
-import interiorImg from "../assets/interior.jpg";
+import interiorImg from "../assets/interior.png";
+import { useScrollReveal } from "../hooks/use-scroll-reveal";
 import { RESTAURANT } from "../data/restaurant";
+
+function AboutSection({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`${className} transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 const title = "About & Contact — Kivu Coffee Cup, Gitesi Karongi";
 const description =
@@ -57,7 +71,7 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <>
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:py-24 lg:grid-cols-2">
+      <AboutSection className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:py-24 lg:grid-cols-2">
         <div>
           <p className="eyebrow">Our story</p>
           <h1 className="mt-3 font-display text-4xl font-semibold sm:text-5xl">
@@ -82,9 +96,9 @@ function AboutPage() {
           loading="lazy"
           className="rounded-3xl shadow-[var(--shadow-lift)]"
         />
-      </section>
+      </AboutSection>
 
-      <section className="bg-secondary/60 py-16 sm:py-24">
+      <AboutSection className="bg-secondary/60 py-16 sm:py-24">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 lg:grid-cols-[1fr_1fr]">
           <div>
             <h2 className="font-display text-3xl font-semibold">Visit or contact us</h2>
@@ -125,7 +139,7 @@ function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </AboutSection>
     </>
   );
 }
